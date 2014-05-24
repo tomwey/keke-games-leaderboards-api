@@ -1,6 +1,6 @@
 API_ENV = 'production'
-API_ROOT = "/home/deployer/apps/keke-games-leadboards-api/current"
-APP_SHARED = "/home/deployer/apps/keke-games-leadboards-api/shared"
+API_ROOT = "/home/deployer/apps/keke-games-leaderboards-api/current"
+APP_SHARED = "/home/deployer/apps/keke-games-leaderboards-api/shared"
 God.pid_file_directory = "#{API_ROOT}/config"
 PROCESS_NUM = 2
 

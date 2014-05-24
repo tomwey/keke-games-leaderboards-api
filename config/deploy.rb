@@ -36,19 +36,9 @@ namespace :deploy do
   end
   after "deploy:finalize_update", "deploy:symlink_config"
   
+  task :start_god do
+    run "cd #{current_path}; god -c config/listen.god"
+  end
+  
 end
 
-namespace :remote_rake do
-  task :create do
-    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:create"
-  end
-  task :migrate do
-    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:migrate"
-  end
-  task :seed do
-    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:seed"
-  end
-  task :drop do
-    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:drop"
-  end
-end
