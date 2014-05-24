@@ -1,0 +1,8 @@
+production:
+  adapter: em_mysql2
+  encoding: utf8
+  database: keke-games-leaderboards-pro
+  pool: 5
+  username: root
+  password:
+  host: localhost
