@@ -6,11 +6,19 @@ module KeKeGameLeaderboard
     resources 'leaderboards' do
       segment ':leaderboard_id' do
         resources 'users' do
+          params do
+            requires :uid, type: String
+            optional :page, type: Integer
+          end
           get '/' do
             @leaderboard = Leaderboard.find(params[:leaderboard_id])
             page = params[:page] ? params[:page].to_i : 1
             @scores = @leaderboard.scores.sort_by_value.page(page)
-            { code: 0, message: 'ok', data: @scores }
+            @user = User.find_by_udid(params[:uid])
+            if @user
+              @score = @leaderboard.scores.where(user_id: @user.id).first
+            end
+            { code: 0, message: 'ok', data: { total: User.count, scores: @scores, me: { score: @score.value, rank: @score.rank } } }
           end # end get '/'
           
           get ':id' do

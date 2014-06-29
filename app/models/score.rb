@@ -21,11 +21,8 @@ class Score < ActiveRecord::Base
     {
       id: self.id,
       score: self.value,
-      user: {
-        id: self.user.id,
-        name: self.user.name,
-        udid: self.user.udid
-      }
+      uid: self.user.try(:udid),
+      uname: self.user.try(:name)
     }
   end
   

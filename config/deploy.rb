@@ -40,5 +40,9 @@ namespace :deploy do
     run "cd #{current_path}; god -c config/listen.god"
   end
   
+  task :stop_god do
+      run "god terminate"
+  end
+  
 end
 
