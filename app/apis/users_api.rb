@@ -18,7 +18,7 @@ module KeKeGameLeaderboard
             if @user
               @score = @leaderboard.scores.where(user_id: @user.id).first
             end
-            { code: 0, message: 'ok', data: { total: User.count, scores: @scores, me: { score: @score.value, rank: @score.rank } } }
+            { code: 0, message: 'ok', data: { total: User.count, scores: @scores, me: { score: @score.try(:value), rank: @score.try(:rank) } } }
           end # end get '/'
           
           get ':id' do
