@@ -14,7 +14,7 @@ class Score < ActiveRecord::Base
   end
   
   def rank
-    Score.where('value > ?', value).count + 1
+    Score.where('value > ? and leaderboard_id = ?', value, self.leaderboard.id).count + 1
   end
   
   def as_json(options)
