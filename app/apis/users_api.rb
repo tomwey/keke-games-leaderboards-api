@@ -9,11 +9,16 @@ module KeKeGameLeaderboard
           params do
             requires :uid, type: String
             optional :page, type: Integer
+            optional :size, type: Integer
           end
           get '/' do
             @leaderboard = Leaderboard.find(params[:leaderboard_id])
             page = params[:page] ? params[:page].to_i : 1
-            @scores = @leaderboard.scores.sort_by_value.page(page)
+            size = params[:page] ? params[:page].to_i : 50
+            if size > 50
+              size = 50
+            end
+            @scores = @leaderboard.scores.sort_by_value.page(page,size)
             @user = User.find_by_udid(params[:uid])
             if @user
               @score = @leaderboard.scores.where(user_id: @user.id).first

@@ -8,9 +8,9 @@ class Score < ActiveRecord::Base
   
   scope :sort_by_value, lambda { order('value desc') }
   
-  def self.page(page)
-    offset = (page - 1) * PER_PAGE
-    offset(offset).limit(PER_PAGE)
+  def self.page(page, size)
+    offset = (page - 1) * size
+    offset(offset).limit(size)
   end
   
   def rank
